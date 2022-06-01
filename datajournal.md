@@ -6,7 +6,7 @@
 
 2 kenapa kamu pengen jadi data analyst
 ##### Ask Questions to Make Data-Driven Decision 
-> jika menggunakan contoh 1 & 2, saya membayangkan bisa menjelaskan berbagai macam permasalahan bahkan sebelum orang menyadari masalah itu ada. contoh data exploration lautan ternyata memberi tahu kita pemanasan global telah mempercepat cairnya gletser. dika dikumpulkan tiap rutin per hari, maka jika dibuatkan model statistik untuk memprediksi dalam bulan dan tahun akan ketemu berapa banyak mencair. Menurut newssky.com jika temperatur naik sebanyak 2 U+2103 jika air naik 1 meter saja itu akan menenggelamkan 10% populasi. 
+> jika menggunakan contoh 1 & 2, saya membayangkan bisa menjelaskan berbagai macam permasalahan bahkan sebelum orang menyadari masalah itu ada. contoh data exploration lautan ternyata memberi tahu kita pemanasan global telah mempercepat cairnya gletser. dika dikumpulkan tiap rutin per hari, maka jika dibuatkan model statistik untuk memprediksi dalam bulan dan tahun akan ketemu berapa banyak mencair. Menurut newssky.com jika temperatur naik sebanyak 2&#8451; jika air naik 1 meter saja itu akan menenggelamkan 10% populasi. 
 <br>
 3
 <br>
