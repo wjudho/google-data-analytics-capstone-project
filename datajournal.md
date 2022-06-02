@@ -1,4 +1,4 @@
-> <strong>Disclaimer</strong>: pertanyaan interview bersumber dari dqlab [[link]](https://www.dqlab.id/deretan-pertanyaan-interview-data-analyst-bagi-fresh-graduate) pertanyaan ini tidak ada kaitannya dengan proyek capstone tapi menurut saya pribadi mengena<br>
+> <strong>Disclaimer</strong>: This interview question i took from dqlab [[link]](https://www.dqlab.id/deretan-pertanyaan-interview-data-analyst-bagi-fresh-graduate) however the answer is pure came from me<br>
 
 #### 1. What data means to you?
 ##### Foundations: Data, Data, Everywhere
@@ -11,7 +11,7 @@ data adalah sebuah kumpulan informasi (gambar, text, video, sensor) yang diperol
 
 #### 2. Why Do You Want to be a Data Analyst
 ##### Ask Questions to Make Data-Driven Decision 
-> Continues from previous example. <strong>Data will tell me problem even before people realize there is problem</strong>.<br>
+> Continues from previous example. <strong>Data will help us realize problem even before people realize there is problem</strong>.<br>
 
 #### 3. Have You Work On a Data Project Before
 ##### Capstone Case Study 
@@ -25,4 +25,8 @@ data adalah sebuah kumpulan informasi (gambar, text, video, sensor) yang diperol
 
 #### 5. What Makes Data Analyst Interesting 
 ##### Capstone Case Study
-> I wonder how many college degree combine to teach a person to be an Analyst. Various subject from Excel, SQL, Tableau, R Programming, Maths and Statistics it doesn't even stop there when scientist decide to use robot, machine learning and artificial intelligence. I believe that climate change is real, even president joe biden predict Jakarta will sink under water from voi.com [[link]](https://voi.id/en/bernas/72396/joe-biden-predicts-jakarta-sinking-in-10-years-can-mangroves-be-prevented)<strong>. Just as i mention previously, that Data will help us realize problem even before people realize there is problem</strong>.The question remains, how much problem that we don't realize exist, and what happens in a country who has no man power as a Scientist whose job monitor Data frequently in an era where climate change is inevitable<br>
+> <strong>I wonder how many college degree combine to teach a person to be an Analyst. Various subject from Excel, SQL, Tableau, R Programming, Maths and Statistics. Even Further the scientist decide to use robot, machine learning and artificial intelligence</strong>. I believe that climate change is real, even president joe biden predict Jakarta will sink under water from voi.com [[link]](https://voi.id/en/bernas/72396/joe-biden-predicts-jakarta-sinking-in-10-years-can-mangroves-be-prevented)<strong>. Just as i mention previously, that Data will help us realize problem even before people realize there is problem</strong>.The question remains, how much problem that we don't realize exist, and what happens in a country who has no man power as a Scientist whose job monitor Data frequently in an era where climate change is inevitable. <strong>This what makes data interesting, it's not for everybody, but it's needed in every aspect of live</strong>.<br>
+
+#### 6. What Requirement Does Data Analysis Need to Have 
+##### Capstone Case Study
+> a basic elementary math and high school statistics. A technical skill in excel, SQL, tableau, and r programming which will help in cleaning data, automation process millions of data, statistics analysis and reporting.<br> 
