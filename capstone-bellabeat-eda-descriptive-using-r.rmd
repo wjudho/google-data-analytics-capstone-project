@@ -45,8 +45,6 @@ Urška Sršen has provided Us with datasets in [[kaggle](https://www.kaggle.com/
 list.files("../input/fitbit/Fitabase Data 4.12.16-5.12.16")
 ```
 
-<br>
-
 **After exploring for some time, We decide to discard most of datasets, heres the reason:** 
 
 * Because it contain duplicate column which already presented fully on `dailyActivity_merged.csv`,
