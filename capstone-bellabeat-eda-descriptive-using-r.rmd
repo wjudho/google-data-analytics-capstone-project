@@ -1,0 +1,246 @@
+---
+title: "Google Capstone Project - EDA & Basic Descriptive Analysis using R"
+author: "wj"
+date: '2022-06-12'
+output: 
+    html_document:
+        toc: true
+        theme: readable
+        highlight: tango
+---
+
+## **ASK** {.tabset}
+
+### **Objective** {-}
+
+**Urška Sršen would like to know any recommendation for how the data can inform Bellabeat Marketing strategy.**
+
+1. What are some trends in smart device usage?
+2. How could these trends apply to Bellabeat customers?
+3. How could these trends help influence Bellabeat marketing strategy?
+
+### **About Bellabeat** {-}
+
+Bellabeat device works like smartwatch and yet this is not a watch rather a wearable device that tracks sleeps, steps distance, and daily activity. It claimed using a sensor in the device, to transfer the data through an app in your Android or Apple smartphones.
+
+## **PREPARE** {.tabset}
+
+### Tools {-}
+
+**We decide to work everything using R Studio in format `Rmd`. Heres what we think:**
+
+1. dataset already available (since We dont have to get it from server database).
+2. If needed, R has the ability to connect to database and function to call schema using SQL queries directly in R.
+3. We refrain using Excel (Power Query) as the Dates timezone in `csv` usually conflicts with Windows OS regional.
+4. Excel refuse to open large file `this data set is too large for the excel grid`.
+5. We dont use Tableau because R simply has the library to create chart that sufficient for the descriptive analytic purpose.
+6. `Rmd` allows me to create `html`, `doc`, or `pdf` file for documentation purpose.
+
+### Downloading Datasets {-}
+
+Urška Sršen has provided Us with datasets in [[kaggle](https://www.kaggle.com/datasets/arashnic/fitbit)]. 
+<br>
+**After downloaded, Our files list in folder should be 18 csv. Some files are zipped, so make sure to unzip it.**
+
+```{r, results='hold'}
+list.files("../input/fitbit/Fitabase Data 4.12.16-5.12.16")
+```
+
+<br>
+
+**After exploring for some time, We decide to discard most of datasets, heres the reason:** 
+
+* Because it contain duplicate column which already presented fully on `dailyActivity_merged.csv`,
+* We couldnt find the formula to calculate column `TotalDistance` on `dailyActivity_merged.csv`, 
+* We dont use hourly, minutes, and second dataset, We believe daily data is sufficient enough to represent them.
+
+At the end of this project, We decide to showcase our finding on those duplicate column, and why we decide to do so.
+
+### Loading Package {-}
+
+* **tidyverse:** EDA purpose 
+* **lubridate:** Working with Date
+
+```{r, results='hold'}
+# loading package
+library(tidyverse)
+library(lubridate)
+```
+<br>
+
+**Loading tidyverse alone will automatically load a bunchs of different library altogether.**
+
+```{r, results='hold'}
+# list tidyverse library
+tidyverse_packages()
+```
+### Importing Datasets {-}
+
+* We save datasets into a variable each, so that we dont have to `read.csv("filename.csv")` everytime we call functions. 
+* We also use a variable names that concise and easy to understand for other analyst to read.
+
+```{r, results='hold'}
+# importing datasets
+d_activity <- read.csv("../input/fitbit/Fitabase Data 4.12.16-5.12.16/dailyActivity_merged.csv")
+d_calories <- read.csv("../input/fitbit/Fitabase Data 4.12.16-5.12.16/dailyCalories_merged.csv")
+d_intensities <- read.csv("../input/fitbit/Fitabase Data 4.12.16-5.12.16/dailyIntensities_merged.csv")
+d_steps <- read.csv("../input/fitbit/Fitabase Data 4.12.16-5.12.16/dailySteps_merged.csv")
+d_sleep <- read.csv("../input/fitbit/Fitabase Data 4.12.16-5.12.16/sleepDay_merged.csv")
+weightlog <- read.csv("../input/fitbit/Fitabase Data 4.12.16-5.12.16/weightLogInfo_merged.csv")
+```
+
+
+### Understanding Datasets {-}
+
+The process of tidying data could lead to unexpected things, most of it something silly like columns or rows name being replaced or deleted unintended. We can use both total column and rows as a benchmark. **Use this section from time to time to cross-check whether our datasets have been changed or not.** 
+
+```{r, results='hold'}
+# total rows x columns (not distinct)
+dim_desc(d_activity)
+dim_desc(d_calories)
+dim_desc(d_intensities)
+dim_desc(d_steps)
+dim_desc(d_sleep)
+dim_desc(weightlog)
+```
+<br>
+
+We pick column ID in every dataset and use `unique` function to distinct the customer.  Here we can see total participant in our subject analysis. **The majority dataset is telling us 33 people, but some are mention even less**. It is indicated that some customer's log aren't even recorded.
+
+```{r, results='hold'}
+# Monitor Total Customer on every record
+length(unique(d_activity$Id))
+length(unique(d_calories$Id))
+length(unique(d_intensities$Id))
+length(unique(d_steps$Id))
+length(unique(d_sleep$Id))
+length(unique(weightlog$Id))
+```
+<br>
+
+**Few thing to consider are:**
+
+1. Date should be Date format (not character), this is why Excel has problem handling it.
+2. ID should be a character, We dont want to accidentally calculate an ID, as its not a number rather an identity, so it not supposed to changed.
+
+```{r, results='hold'}
+# General Overview, especially `date`, and `data type`
+glimpse(d_activity)
+glimpse(d_calories)
+glimpse(d_intensities)
+glimpse(d_steps)
+glimpse(d_sleep)
+glimpse(weightlog)
+```
+
+
+### Check for Missing Value {-}
+
+**If the values are missing at random, the data will still representing the population, otherwise the analysis result will be biased.**  
+
+```{r, results='hold'}
+# Check total NA in every column
+colSums(is.na(d_activity))
+colSums(is.na(d_calories))
+colSums(is.na(d_intensities))
+colSums(is.na(d_steps))
+colSums(is.na(d_sleep))
+colSums(is.na(weightlog))
+```
+<br>
+
+**we got 65 NA in `weightlog`. Is 65 big or small?**
+
+```{r, results='hold'}
+# sum total NA on each dataset without reveal the column
+sum(is.na(d_activity))
+sum(is.na(d_calories))
+sum(is.na(d_intensities))
+sum(is.na(d_steps))
+sum(is.na(d_sleep))
+sum(is.na(weightlog))
+```
+
+<br>
+
+**97% from just one column, staggering!. How could theres no value in there? as if every customer deliberately leave it empty. Up to this point, there is no point to remove the missing value**
+
+```{r, results='hold'}
+# How much NA value in percentage
+colSums(is.na(weightlog)) / nrow(weightlog)
+```
+
+
+## **PROCESS** {.tabset}
+
+
+### Handling Missing Value {-}
+
+```{r, results='hold'}
+# Remove missing value
+
+
+
+```
+
+### Change Data Type {-}
+
+**PR: tanggal butuh am/pm ubah syntaxnya**
+
+```{r, results='hold'}
+# Change date type from char to POSIXct
+weightlog$logedit <- mdy_hms(weightlog$Date)
+d_activity$ActivityDateNew <- mdy(d_activity$ActivityDate)
+d_sleep$SleepDayNew <- mdy_hms(d_sleep$SleepDay)
+```
+
+```{r, results='hold'}
+# Change ID from numeric to char
+d_activity$Id <- as.character(d_activity$Id)
+```
+
+
+## **ANALYZE & SHARE** {.tabset}
+
+### Plot Weightlog {-}
+
+```{r, results='hold'}
+# Create scatterplot weightlog (ggplot exclude missing value by default)
+ggplot(data = weightlog, aes(x=BMI, y=WeightKg)) + 
+  geom_point()
+```
+
+
+
+### Plot d_sleep {-}
+
+```{r}
+# Create scatterplot d_sleep
+ggplot(data = d_sleep, aes(x=TotalMinutesAsleep, y=TotalTimeInBed)) +
+  geom_point()
+
+```
+
+### Plot d_activity {-}
+
+```{r, results='hold'}
+# Create scatterplot steps-distance
+ggplot(data = d_activity, aes(x=TotalSteps, y=TotalDistance)) +
+  geom_point()
+```
+
+```{r, results='hold'}
+# Create scatterplot 
+ggplot(data = d_activity, aes(x=Calories, y=TotalDistance)) +
+  geom_point()
+
+```
+
+### Discarded Datasets {-}
+
+```{r, result}
+
+```
+
+
+
