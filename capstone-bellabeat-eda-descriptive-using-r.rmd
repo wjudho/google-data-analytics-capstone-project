@@ -6,7 +6,6 @@ output:
     html_document:
         toc: true
         theme: readable
-        highlight: tango
 ---
 
 ## **ASK** {.tabset}
