@@ -1,4 +1,3 @@
-# %% [code]
 ---
 title: "Google Capstone Project - EDA & Basic Descriptive Analysis using R"
 author: "**Wisjnu Judho**"
