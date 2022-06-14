@@ -1,3 +1,4 @@
+# %% [code]
 ---
 title: "Google Capstone Project - EDA & Basic Descriptive Analysis using R"
 author: "**Wisjnu Judho**"
@@ -97,7 +98,7 @@ dim_desc(weightlog)
 ```
 <br>
 
-We pick column ID in every dataset and use `unique` function to distinct the customer.  Here we can see total participant in our subject analysis. **The majority dataset is telling us 33 people, but some are mention even less**. It is indicated that some customer's log aren't even recorded.
+We pick column ID in every dataset and use `unique` function to distinct the customer.  Here we can see total participant in our subject analysis. **The majority dataset is telling us 33 people, but some are mention even less**. It is indicated that some customers log arent even recorded. it means some customer didnt use particular feature.
 
 ```{r, collapse=TRUE}
 # Monitor Total Customer on every record
@@ -185,7 +186,21 @@ d_activity$Id <- as.character(d_activity$Id)
 
 ## **ANALYZE & SHARE** {.tabset}
 
+### Mean Median Mode {-}
+
+```{r, collapse=TRUE}
+# descriptive analysis
+summary(d_activity)
+summary(d_calories)
+summary(d_intensities)
+summary(d_steps)
+summary(d_sleep)
+summary(weightlog)
+```
+
 ### Plot Weightlog {-}
+
+We can se there is a correlation between BMI and WeightKg, eventhough subtle
 
 ```{r}
 # Create scatterplot weightlog (ggplot exclude missing value by default)
@@ -194,36 +209,34 @@ ggplot(data = weightlog, aes(x=BMI, y=WeightKg)) +
 ```
 
 
-
 ### Plot d_sleep {-}
+
+We can see positive correlation between TotalMinutesAsleep and TotalTimeInBed, obviously and it is very high. 
 
 ```{r}
 # Create scatterplot d_sleep
 ggplot(data = d_sleep, aes(x=TotalMinutesAsleep, y=TotalTimeInBed)) +
   geom_point()
-
 ```
 
 ### Plot d_activity {-}
+
+It seems the spread are gathering from the `0` towards `1000`. It means some customer were exciting `in` doing workout just `for` starter then consecutively stop
 
 ```{r}
 # Create scatterplot steps-distance
 ggplot(data = d_activity, aes(x=TotalSteps, y=TotalDistance)) +
   geom_point()
 ```
+calory burns are not high, they are scattered towards middle. Meaning it is correlated each other but obviously people dont like burn the idea of burning calory
 
 ```{r}
 # Create scatterplot 
 ggplot(data = d_activity, aes(x=Calories, y=TotalDistance)) +
   geom_point()
-
 ```
 
-### Discarded Datasets {-}
 
-```{r, result}
-
-```
 
 
 
