@@ -35,7 +35,7 @@ Bellabeat device works like smartwatch and yet this is not a watch rather a wear
 5. We dont use Tableau because R simply has the library to create chart that sufficient for the descriptive analytic purpose.
 6. `Rmd` allows me to create `html`, `doc`, or `pdf` file for documentation purpose.
 
-### Downloading Datasets {-}
+### Datasets {-}
 
 Urška Sršen has provided Us with datasets in [[kaggle](https://www.kaggle.com/datasets/arashnic/fitbit)]. 
 <br>
@@ -52,8 +52,18 @@ list.files("../input/fitbit/Fitabase Data 4.12.16-5.12.16")
 * Because it contain duplicate column which already presented fully on `dailyActivity_merged.csv`,
 * We couldnt find the formula to calculate column `TotalDistance` on `dailyActivity_merged.csv`, 
 * We dont use hourly, minutes, and second dataset, We believe daily data is sufficient enough to represent them.
+* We save datasets into a variable each, so that we dont have to `read.csv("filename.csv")` everytime we call functions. 
+* We also use a variable names that concise and easy to understand for other analyst to read.
 
-At the end of this project, We decide to showcase our finding on those duplicate column, and why we decide to do so.
+```{r, collapse=TRUE}
+# importing datasets
+d_activity <- read.csv("../input/fitbit/Fitabase Data 4.12.16-5.12.16/dailyActivity_merged.csv")
+d_calories <- read.csv("../input/fitbit/Fitabase Data 4.12.16-5.12.16/dailyCalories_merged.csv")
+d_intensities <- read.csv("../input/fitbit/Fitabase Data 4.12.16-5.12.16/dailyIntensities_merged.csv")
+d_steps <- read.csv("../input/fitbit/Fitabase Data 4.12.16-5.12.16/dailySteps_merged.csv")
+d_sleep <- read.csv("../input/fitbit/Fitabase Data 4.12.16-5.12.16/sleepDay_merged.csv")
+weightlog <- read.csv("../input/fitbit/Fitabase Data 4.12.16-5.12.16/weightLogInfo_merged.csv")
+```
 
 ### Loading Package {-}
 
@@ -73,21 +83,6 @@ library(lubridate)
 # list tidyverse library
 tidyverse_packages()
 ```
-### Importing Datasets {-}
-
-* We save datasets into a variable each, so that we dont have to `read.csv("filename.csv")` everytime we call functions. 
-* We also use a variable names that concise and easy to understand for other analyst to read.
-
-```{r, collapse=TRUE}
-# importing datasets
-d_activity <- read.csv("../input/fitbit/Fitabase Data 4.12.16-5.12.16/dailyActivity_merged.csv")
-d_calories <- read.csv("../input/fitbit/Fitabase Data 4.12.16-5.12.16/dailyCalories_merged.csv")
-d_intensities <- read.csv("../input/fitbit/Fitabase Data 4.12.16-5.12.16/dailyIntensities_merged.csv")
-d_steps <- read.csv("../input/fitbit/Fitabase Data 4.12.16-5.12.16/dailySteps_merged.csv")
-d_sleep <- read.csv("../input/fitbit/Fitabase Data 4.12.16-5.12.16/sleepDay_merged.csv")
-weightlog <- read.csv("../input/fitbit/Fitabase Data 4.12.16-5.12.16/weightLogInfo_merged.csv")
-```
-
 
 ### Understanding Datasets {-}
 
