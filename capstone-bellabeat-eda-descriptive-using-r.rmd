@@ -42,7 +42,7 @@ Urška Sršen has provided Us with datasets in [[kaggle](https://www.kaggle.com/
 <br>
 **After downloaded, Our files list in folder should be 18 csv. Some files are zipped, so make sure to unzip it.**
 
-```{r, results='hold'}
+```{r, collapse=TRUE}
 list.files("../input/fitbit/Fitabase Data 4.12.16-5.12.16")
 ```
 
@@ -61,7 +61,7 @@ At the end of this project, We decide to showcase our finding on those duplicate
 * **tidyverse:** EDA purpose 
 * **lubridate:** Working with Date
 
-```{r}
+```{r, collapse=TRUE}
 # loading package
 library(tidyverse)
 library(lubridate)
@@ -70,7 +70,7 @@ library(lubridate)
 
 **Loading tidyverse alone will automatically load a bunchs of different library altogether.**
 
-```{r, results='hold'}
+```{r, collapse=TRUE}
 # list tidyverse library
 tidyverse_packages()
 ```
@@ -79,7 +79,7 @@ tidyverse_packages()
 * We save datasets into a variable each, so that we dont have to `read.csv("filename.csv")` everytime we call functions. 
 * We also use a variable names that concise and easy to understand for other analyst to read.
 
-```{r, results='hold'}
+```{r, collapse=TRUE}
 # importing datasets
 d_activity <- read.csv("../input/fitbit/Fitabase Data 4.12.16-5.12.16/dailyActivity_merged.csv")
 d_calories <- read.csv("../input/fitbit/Fitabase Data 4.12.16-5.12.16/dailyCalories_merged.csv")
@@ -94,20 +94,25 @@ weightlog <- read.csv("../input/fitbit/Fitabase Data 4.12.16-5.12.16/weightLogIn
 
 The process of tidying data could lead to unexpected things, most of it something silly like columns or rows name being replaced or deleted unintended. We can use both total column and rows as a benchmark. **Use this section from time to time to cross-check whether our datasets have been changed or not.** 
 
-```{r}
-# total rows x columns (not distinct)
+```{r, collapse=TRUE}
+# show total rows|columns d_activity (not distinct)
 dim_desc(d_activity)
+# show total rows|columns d_calories (not distinct)
 dim_desc(d_calories)
+# show total rows|columns d_intensities (not distinct)
 dim_desc(d_intensities)
+# show total rows|columns d_steps (not distinct)
 dim_desc(d_steps)
+# show total rows|columns d_sleep (not distinct)
 dim_desc(d_sleep)
+# show total rows|columns weightlog (not distinct)
 dim_desc(weightlog)
 ```
 <br>
 
 We pick column ID in every dataset and use `unique` function to distinct the customer.  Here we can see total participant in our subject analysis. **The majority dataset is telling us 33 people, but some are mention even less**. It is indicated that some customer's log aren't even recorded.
 
-```{r, results='hold'}
+```{r, collapse=TRUE}
 # Monitor Total Customer on every record
 length(unique(d_activity$Id))
 length(unique(d_calories$Id))
@@ -123,7 +128,7 @@ length(unique(weightlog$Id))
 1. Date should be Date format (not character), this is why Excel has problem handling it.
 2. ID should be a character, We dont want to accidentally calculate an ID, as its not a number rather an identity, so it not supposed to changed.
 
-```{r}
+```{r, collapse=TRUE}
 # General Overview, especially `date`, and `data type`
 glimpse(d_activity)
 glimpse(d_calories)
@@ -138,7 +143,7 @@ glimpse(weightlog)
 
 **If the values are missing at random, the data will still representing the population, otherwise the analysis result will be biased.**  
 
-```{r}
+```{r, collapse=TRUE}
 # Check total NA in every column
 colSums(is.na(d_activity))
 colSums(is.na(d_calories))
@@ -151,7 +156,7 @@ colSums(is.na(weightlog))
 
 **we got 65 NA in `weightlog`. Is 65 big or small?**
 
-```{r}
+```{r, collapse=TRUE}
 # sum total NA on each dataset without reveal the column
 sum(is.na(d_activity))
 sum(is.na(d_calories))
@@ -165,7 +170,7 @@ sum(is.na(weightlog))
 
 **97% from just one column, staggering!. How could theres no value in there? as if every customer deliberately leave it empty. Up to this point, there is no point to remove the missing value**
 
-```{r}
+```{r, collapse=TRUE}
 # How much NA value in percentage
 colSums(is.na(weightlog)) / nrow(weightlog)
 ```
