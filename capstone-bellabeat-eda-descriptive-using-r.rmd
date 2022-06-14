@@ -1,7 +1,7 @@
 ---
 title: "Google Capstone Project - EDA & Basic Descriptive Analysis using R"
-author: "wj"
-date: '2022-06-12'
+author: "**Wisjnu Judho**"
+date: '`r format(Sys.time())`'
 output: 
     html_document:
         toc: true
@@ -94,17 +94,12 @@ weightlog <- read.csv("../input/fitbit/Fitabase Data 4.12.16-5.12.16/weightLogIn
 The process of tidying data could lead to unexpected things, most of it something silly like columns or rows name being replaced or deleted unintended. We can use both total column and rows as a benchmark. **Use this section from time to time to cross-check whether our datasets have been changed or not.** 
 
 ```{r, collapse=TRUE}
-# show total rows|columns d_activity (not distinct)
+# show total rows|columns each dataset (not distinct)
 dim_desc(d_activity)
-# show total rows|columns d_calories (not distinct)
 dim_desc(d_calories)
-# show total rows|columns d_intensities (not distinct)
 dim_desc(d_intensities)
-# show total rows|columns d_steps (not distinct)
 dim_desc(d_steps)
-# show total rows|columns d_sleep (not distinct)
 dim_desc(d_sleep)
-# show total rows|columns weightlog (not distinct)
 dim_desc(weightlog)
 ```
 <br>
@@ -153,7 +148,7 @@ colSums(is.na(weightlog))
 ```
 <br>
 
-**we got 65 NA in `weightlog`. Is 65 big or small?**
+**Lets make it readable without reveal the column**
 
 ```{r, collapse=TRUE}
 # sum total NA on each dataset without reveal the column
@@ -164,35 +159,26 @@ sum(is.na(d_steps))
 sum(is.na(d_sleep))
 sum(is.na(weightlog))
 ```
-
+**we got 65 NA in `weightlog`. Is 65 big or small?**
 <br>
 
-**97% from just one column, staggering!. How could theres no value in there? as if every customer deliberately leave it empty. Up to this point, there is no point to remove the missing value**
+**Lets calculate total NA by total row, that way we could estimate portion NA in its particular rows**
 
 ```{r, collapse=TRUE}
 # How much NA value in percentage
 colSums(is.na(weightlog)) / nrow(weightlog)
 ```
-
+**97% from just one column, staggering!. How could theres no value in there? as if every customer deliberately leave it empty. Up to this point, there is no point to remove the missing value**
+<br>
 
 ## **PROCESS** {.tabset}
 
 
-### Handling Missing Value {-}
-
-```{r}
-# Remove missing value
-
-
-
-```
-
 ### Change Data Type {-}
 
-**PR: tanggal butuh am/pm ubah syntaxnya**
 
 ```{r}
-# Change date type from char to POSIXct
+# Change date type from char to POSIXct and DATE
 weightlog$logedit <- mdy_hms(weightlog$Date)
 d_activity$ActivityDateNew <- mdy(d_activity$ActivityDate)
 d_sleep$SleepDayNew <- mdy_hms(d_sleep$SleepDay)
