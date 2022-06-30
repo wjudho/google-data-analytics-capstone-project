@@ -34,6 +34,7 @@ fitbit/dailyIntensities_merged.csv
 fitbit/dailySteps_merged.csv
 fitbit/data.csv
 fitbit/googlecapstoneproject.html
+data.csv
 *.csv
 trial.R
 *.json
